@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ</title>
+</head>
+<body>
+    <form action="{{ url_for('score') }}" method="get">
+        {% for question in questions["results"] %}
+        <p><strong>{{ question["question"] | safe }}</strong></p>
+            {% for answer in question["shuffled_answers"] %}
+            <input type="radio" name="q{{ question.index }}" value="{{ answer | safe }}"> {{ answer | safe }}<br>
+            {% endfor %}
+        {% endfor %}
+        <button type="submit">Submit answers</button>
+    </form>
+    <form action="{{ url_for('logout') }}" method="get">
+        <h2>logout</h2>
+        <button type="submit">logout</button>
+    </form>
+</body>
+</html>

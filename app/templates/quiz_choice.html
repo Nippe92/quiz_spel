@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+    <form action="{{ url_for('quiz_play') }}" method="GET">
+        <h1>Playgame!</h1>
+        <label for="category">Choose category:</label>
+        <select name="category" id="category">
+            {% for cat_id, cat_name in category.items() %}
+            <option value="{{ cat_id }}">{{ cat_name }}</option>
+            {% endfor %}
+        </select>
+    
+        <label for="difficulty">Choose difficulty:</label>
+        <select name="difficulty" id="difficulty">
+            {% for level in difficulty %}
+            <option value="{{ level }}">{{ level }}</option>
+            {% endfor %}
+        </select>
+    
+        <label for="amount">question amount:</label>
+        <select name="amount" id="amount">
+            {% for num in question_amount %}
+            <option value="{{ num }}">{{ num }}</option>
+            {% endfor %}
+        </select>
+    
+        <button type="submit">Quiz start</button>
+
+    </form>
+    <form action="{{ url_for('score') }}" method="get">
+        <h3>Click below to see your scores:</h3>
+        <button type="submit">score</button>
+    </form>
+
+    <form action="{{ url_for('logout') }}" method="get">
+        <h2>logout</h2>
+        <button type="submit">logout</button>
+    </form>
+</body>
+</html>

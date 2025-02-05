@@ -1,8 +1,11 @@
-# skriv hur man startar koden och vad det är för typ av applikation.
 
-# Projekt instruktion:
-en quiz app i flask där man kan välja kategori, svårighetsgrad samt antal frågor.
+# Project intruction
+a quiz game where you can choose categories, diffuculty and number of questions. 
+users are save in a database using SQLAlchemy and each user will get scores depending on how many right quiestions they get.
 
 ## komma igång:
-1. gå in i den virtuella miljön `venv\Scripts\activate` 
-2. installera paketen som finns i filen requirements.in
+1. enter the virtual enviroment `venv\Scripts\activate` 
+2. install the packages in requirements.in
+3. start the app by typing python run.py in the terminal
+4. enter the IP adress that pops up in the terminal
+5. now you can use the quiz app.

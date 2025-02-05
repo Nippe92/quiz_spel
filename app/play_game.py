@@ -8,9 +8,11 @@ class PlayGame:
 
     def fetch_choices(self):
 
-        category = Choices.get_categories()
-        difficulty = Choices.get_difficulties()
-        question_amount = Choices.get_question_amount()
+        choice = Choices()
+
+        category = choice.get_categories()
+        difficulty = choice.get_difficulties()
+        question_amount = choice.get_question_amount()
 
         return category, difficulty, question_amount
 
@@ -19,10 +21,10 @@ class PlayGame:
 
         return url
 
+class Scoreboard:
+    
     def save_score(self, user_id, score):
         pass
-
-class Scoreboard:
     
     def get_highscores(self, limit=15):
         pass
