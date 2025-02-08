@@ -1,9 +1,9 @@
 from flask import current_app as app
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session, flash
 from app import db
 from app.models import User, Score
 from config import Url
-from app.play_game import PlayGame, Scoreboard
+from app.play_game import PlayGame
 from werkzeug.security import check_password_hash, generate_password_hash
 import requests
 import random
@@ -58,8 +58,8 @@ def create_account():
             
             existing_user = User.query.filter_by(username=username).first()
             if existing_user:
-                return "That username is already taken", 400
-            
+                flash("Username taken")
+                return redirect(url_for("create_account"))
             
             hashed_password = generate_password_hash(password, method="pbkdf2:sha256")
             user = User(username=username, password=hashed_password)
@@ -94,20 +94,57 @@ def quiz_play():
     quiz_url = url_builder.build_url(amount, category, difficulty) 
 
     response = requests.get(quiz_url)  
-    questions = response.json()  
+    questions = response.json()
 
-    for index, question in enumerate(questions["results"]):
+
+    session["questions"] = questions["results"]
+    
+    for index, question in enumerate(session["questions"]):
         all_answers = question["incorrect_answers"] + [question["correct_answer"]]
         random.shuffle(all_answers)  
         question["shuffled_answers"] = all_answers
-        question["index"] = index 
+        question["index"] = index
 
-    return render_template("playgame.html", questions=questions)  
+    return render_template("playgame.html", questions=questions)
 
-@app.route("/score", methods=["GET", "POST"])
-def score():
-    
-    return render_template("scores.html")
+
+@app.route("/score", methods=["POST"])
+def add_score():
+
+    user_answers = request.form  
+    correct_answers = 0  
+
+    if "questions" in session:
+        for index, question in enumerate(session["questions"]):  
+            correct_answer = question["correct_answer"]  
+            user_answer = user_answers.get(f"q{index}") 
+
+            if user_answer == correct_answer:
+                correct_answers += 1  
+
+    user_id = session["user_id"]
+
+    new_score = Score(user_id=user_id, score=correct_answers)
+    db.session.add(new_score)
+    db.session.commit()
+
+    user_score = Score.query.filter_by(user_id=user_id).order_by(Score.id.desc()).first()
+
+    return render_template("scores.html", user_score=user_score)
+
+
+
+@app.route("/highscore", methods=["GET", "POST"])
+def highscore():
+
+    user_id = session["user_id"]
+
+    top_scores = Score.query.order_by(Score.score.desc()).limit(15).all()
+
+    user_score = Score.query.filter_by(user_id=user_id).order_by(Score.id.desc()).first()
+
+    return render_template("highscores.html", user_score=user_score, top_scores=top_scores)
+
 
 @app.route("/logout")
 def logout():

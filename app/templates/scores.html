@@ -6,6 +6,25 @@
     <title>Quiz</title>
 </head>
 <body>
-    <h1>Here are your score:</h1>
+    <h1>Here are your quiz score: </h1>
+    <form action="{{ url_for('add_score') }}" method="POST">
+        <input type="hidden" name="score" value="{{ score }}">
+        {% if user_score %}
+            <p>you got: {{ user_score.score }} points</p>
+        {% else %}
+            <p>No points yet</p>
+        {% endif %}
+        <button type="submit">Save score</button>
+    </form>
+
+    <form action="{{ url_for('highscore') }}" method="get">
+        <h2>See highscores</h2>
+        <button type="submit">Highscores</button>
+    </form>
+
+    <form action="{{ url_for('quiz_page') }}" method="get">
+        <h3>Back to start page, click below</h3>
+        <button type="submit">Start page</button>
+    </form>
 </body>
 </html>

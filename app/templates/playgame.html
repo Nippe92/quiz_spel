@@ -6,15 +6,17 @@
     <title>QUIZ</title>
 </head>
 <body>
-    <form action="{{ url_for('score') }}" method="get">
-        {% for question in questions["results"] %}
-        <p><strong>{{ question["question"] | safe }}</strong></p>
+    <form action="{{ url_for('add_score') }}" method="post">
+        {% for question in session["questions"] %}
+            <p><strong>{{ question["question"] | safe }}</strong></p>
+            {% set question_index = loop.index0 %}
             {% for answer in question["shuffled_answers"] %}
-            <input type="radio" name="q{{ question.index }}" value="{{ answer | safe }}"> {{ answer | safe }}<br>
+                <input type="radio" name="q{{ question_index }}" value="{{ answer | safe }}"> {{ answer | safe }}<br>
             {% endfor %}
         {% endfor %}
         <button type="submit">Submit answers</button>
     </form>
+    
     <form action="{{ url_for('logout') }}" method="get">
         <h2>logout</h2>
         <button type="submit">logout</button>

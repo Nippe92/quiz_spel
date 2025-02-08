@@ -1,10 +1,7 @@
 from app.quiz_util import Choices
 from config import Url
 
-
 class PlayGame:
-
-    choice = Choices()
 
     def fetch_choices(self):
 
@@ -21,10 +18,4 @@ class PlayGame:
 
         return url
 
-class Scoreboard:
-    
-    def save_score(self, user_id, score):
-        pass
-    
-    def get_highscores(self, limit=15):
-        pass
+
