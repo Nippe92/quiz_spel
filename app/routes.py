@@ -34,13 +34,14 @@ def login():
                     session["username"] = user.username  
                     return redirect(url_for("quiz_page"))
                 else:
-                    
-                    return render_template("login.html", error="Wrong password, please try again")
+                    flash("Wrong password, please try again")
+                    return render_template("login.html")
             else:
-                
-                return render_template("login.html", error="username does not exist")
+                flash("username does not exist")
+                return render_template("login.html")
         else:
-            return render_template("login.html", error="Please fill in all fields")
+            flash("Please fill in all fields")
+            return render_template("login.html")
     
     
     return render_template("login.html")

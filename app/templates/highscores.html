@@ -4,6 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QUIZ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            }
+            50% {
+                box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+            }
+            100% {
+                box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            }
+        }
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #232323);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Justera till flex-start så innehållet inte är centrerat i höjdled */
+            align-items: center;
+            min-height: 100vh; /* Sätt en minsta höjd på 100vh */
+            margin: 0;
+            overflow-y: auto; /* Aktivera vertikal rullning när innehållet är större än skärmen */
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #ff0000;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 80%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 2px solid #00ffff;
+            padding: 10px;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        th {
+            background: #232323;
+        }
+
+        td {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            transform: scale(1.02);
+            transition: 0.3s;
+        }
+
+        a {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: #ff00ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
     <h1>High Scores</h1>
@@ -33,5 +121,17 @@
     </table>
 
     <a href="{{ url_for('quiz_page') }}">Back to quiz</a>
+
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Starta konfetti-effekten vid sidladdning
+        window.onload = () => {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { x: 0.5, y: 0.5 }
+            });
+        };
+    </script>
 </body>
 </html>

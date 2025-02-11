@@ -4,6 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            }
+            50% {
+                box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+            }
+            100% {
+                box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            }
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #232323);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-y: auto;
+            position: relative;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+        }
+
+        h2, h3 {
+            font-size: 1.5rem;
+            color: #ff0000;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #00ff00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #ff00ff;
+            box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+            transform: scale(1.05);
+        }
+
+        form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ffff;
+            margin: 20px 0;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        input[type="hidden"] {
+            display: none;
+        }
+
+        a {
+            font-size: 1.2rem;
+            color: #ff00ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h2, h3 {
+            font-size: 1.5rem;
+            color: #ff0000;
+            margin-top: 20px;
+        }
+
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Here are your quiz score: </h1>
