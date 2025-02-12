@@ -1,7 +1,7 @@
 
 # Project instruction
 a quiz game where you can choose categories, diffuculty and number of questions. 
-users are saved in a database using SQLAlchemy and each user will get scores depending on how many right quiestions they get.
+users are saved in a database using SQLAlchemy and each user will get scores depending on how many right answers they get.
 There will also be highscores from all users that have played the game.
 
 Make sure that you create an account to start using the site.
@@ -16,11 +16,11 @@ Have fun!
 4. Doublecheck the config.py file that it has both the API and database.
 5. start the app by typing python run.py in the terminal (if there is any issues see "import issues" below what might cause it)
 6. enter the IP adress that pops up in the terminal
-7. make sure that you make an account since the database will be empty.
-8. now you can use the quiz app.
+7. If you use the app for the first time make sure to create an account.
+8. now you can use the quiz app by logging in or creating an account
 
 ### Config.py:
-In this file you will locate the API and also the secret key to the database.
+In this file you will locate the API and also the config class.
 
 #### Import issues:
 Please make sure that the config.py file i located in the main map (Quiz_spel)
@@ -35,15 +35,23 @@ unless in file __init__.py cause then import is:
 from config import Config
 
 #### Choice of course elements:
-Here are the following course elemnts ive used in this project:
+Here are the following course elements ive used in this project:
 
 API-integration - 
 Ive used the open trivia database as my API and uses it to create questions based on the users choices.
 the API is located in the config.py file. No need for an api key since its an open API.
-Using requests and JSON to call the API
+Im using requests and JSON to use the API.
 
 Webb-development - 
 I have used flask to create my quiz site. I create the site by using routes views and html templates.
 
 SQL-with-python - 
 Ive used SQLAlchemy as my database where i store users and scores. Ive also made an relationship with the tables.
+
+File management/encryption/decryption - 
+using bcrypt to hash passwords.
+
+pytest - 
+tested 2 functions from the quiz_util file. 
+* One test was from the function question_amount where i wanted to see that the number of questions to choose from was correct.
+* second test was to check that there actually was a total of 5 categories. Test from test_get_categories.

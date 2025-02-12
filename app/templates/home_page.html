@@ -14,11 +14,11 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
-            overflow: hidden;
+            min-height: 100vh; /* Sätt en minsta höjd på 100vh */
+            justify-content: flex-start; /* Justera till flex-start så innehållet inte är centrerat i höjdled */
+            overflow-y: auto; /* Aktivera vertikal rullning när innehållet är större än skärmen */
         }
         h1 {
             font-size: 3rem;

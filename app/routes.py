@@ -10,13 +10,15 @@ import random
 
 
 @app.route("/")
-def home():
+#first site where you can choose to log in or create account
+def home(): 
     login =request.args.get("login")
     create_account = request.args.get("create_account")
     return render_template("home_page.html", login=login, create_account=create_account)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    #check to see if username/passwords match and are in the database
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -28,13 +30,14 @@ def login():
             if user:
                 print("User found")
                 
+                #if it match send user to the quiz_page otherwise below flash messages will appear
                 if check_password_hash(user.password, password):
                     
                     session["user_id"] = user.id  
                     session["username"] = user.username  
                     return redirect(url_for("quiz_page"))
                 else:
-                    flash("Wrong password, please try again")
+                    flash("Wrong password!")
                     return render_template("login.html")
             else:
                 flash("username does not exist")
@@ -62,9 +65,11 @@ def create_account():
                 flash("Username taken")
                 return redirect(url_for("create_account"))
             
+            #hashing the password
             hashed_password = generate_password_hash(password, method="pbkdf2:sha256")
             user = User(username=username, password=hashed_password)
             
+            #adds user to the database and sends user to login page.
             db.session.add(user)
             db.session.commit()
             return redirect(url_for("login", create_account="success"))
@@ -78,7 +83,7 @@ def quiz_page():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    choice = PlayGame()
+    choice = PlayGame() #makes an instance of the PlayGame class
 
     category, difficulty, question_amount = choice.fetch_choices()
 
@@ -91,6 +96,7 @@ def quiz_play():
     category = request.args.get("category")
     difficulty = request.args.get("difficulty")
 
+    #builds the Url after user choices
     url_builder = Url()
     quiz_url = url_builder.build_url(amount, category, difficulty) 
 
@@ -100,6 +106,7 @@ def quiz_play():
 
     session["questions"] = questions["results"]
     
+    # combine right and wrong answers and save them.
     for index, question in enumerate(session["questions"]):
         all_answers = question["incorrect_answers"] + [question["correct_answer"]]
         random.shuffle(all_answers)  
@@ -115,10 +122,10 @@ def add_score():
     user_answers = request.form  
     correct_answers = 0  
 
-    if "questions" in session:
+    if "questions" in session: # check to see if there is any questions in the session.
         for index, question in enumerate(session["questions"]):  
-            correct_answer = question["correct_answer"]  
-            user_answer = user_answers.get(f"q{index}") 
+            correct_answer = question["correct_answer"] #fetch the right answer
+            user_answer = user_answers.get(f"q{index}") # get the user answer from the dictionary.
 
             if user_answer == correct_answer:
                 correct_answers += 1  
