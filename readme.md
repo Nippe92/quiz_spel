@@ -13,17 +13,14 @@ Have fun!
 1. create a virtual envireoment `python -m venv venv` in the main folder
 2. enter the virtual enviroment `venv\Scripts\activate` (make sure you're in the right directory)
 3. install the required packages in requirements.txt by typing the following in terminal: `pip install -r requirements.txt` 
-4. create a config.py. See below for more information.
+4. Doublecheck the config.py file that it has both the API and database.
 5. start the app by typing python run.py in the terminal (if there is any issues see "import issues" below what might cause it)
 6. enter the IP adress that pops up in the terminal
-7. now you can use the quiz app.
+7. make sure that you make an account since the database will be empty.
+8. now you can use the quiz app.
 
 ### Config.py:
-Please check your email to see what to put in the config file.
-You should have received an Config class containing API-key and database.
-Copy this information and paste it in the config file that you create.
-Make sure that you create the config.py file in the main folder called quiz_spel
-otherwise there will be issues.
+In this file you will locate the API and also the secret key to the database.
 
 #### Import issues:
 Please make sure that the config.py file i located in the main map (Quiz_spel)
@@ -37,16 +34,16 @@ from config import Url
 unless in file __init__.py cause then import is:
 from config import Config
 
-##### Choice of course elements:
-Here are the following course elemts ive used in this project:
+#### Choice of course elements:
+Here are the following course elemnts ive used in this project:
+
 API-integration - 
-I felt like i wanted to learn more about API because it is used alot for working developers.
-I believe that most project being made in the work life atleast have some API-integration so i felt that its very good to be
-learning and using it the right way.
-The api i chose is located in the config.py file.
+Ive used the open trivia database as my API and uses it to create questions based on the users choices.
+the API is located in the config.py file. No need for an api key since its an open API.
+Using requests and JSON to call the API
 
 Webb-development - 
-I chose Flask because i wanted to make a project that i felt could actually be used by others and to make it more realistic.
+I have used flask to create my quiz site. I create the site by using routes views and html templates.
 
 SQL-with-python - 
-SQLAlchemy is the database i chose cause i think it was the most reasonable to chose for this project and its easy to navigate through.
+Ive used SQLAlchemy as my database where i store users and scores. Ive also made an relationship with the tables.

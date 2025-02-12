@@ -19,17 +19,18 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0d0d0d, #232323);
+            background: linear-gradient(135deg, #1a1a1a, #232323);
             color: #00ffff;
             font-family: 'Orbitron', sans-serif;
             text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Justera till flex-start så innehållet inte är centrerat i höjdled */
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Sätt en minsta höjd på 100vh */
             margin: 0;
-            overflow: hidden;
+            overflow-y: auto; /* Aktivera vertikal rullning när innehållet är större än skärmen */
+            position: relative;
         }
 
         form {

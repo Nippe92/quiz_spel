@@ -114,7 +114,7 @@
         {% for score in top_scores %}
         <tr>
             <td>{{ loop.index }}</td>  
-            <td>User {{ score.user_id }}</td>  
+            <td>{{ score.user.username }}</td>  
             <td>{{ score.score }}</td>
         </tr>
         {% endfor %}

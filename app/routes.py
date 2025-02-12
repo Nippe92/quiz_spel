@@ -140,9 +140,9 @@ def highscore():
 
     user_id = session["user_id"]
 
-    top_scores = Score.query.order_by(Score.score.desc()).limit(15).all()
+    top_scores = Score.query.join(User).order_by(Score.score.desc()).limit(15).all()
 
-    user_score = Score.query.filter_by(user_id=user_id).order_by(Score.id.desc()).first()
+    user_score = Score.query.join(User).filter(User.id == user_id).order_by(Score.id.desc()).first()
 
     return render_template("highscores.html", user_score=user_score, top_scores=top_scores)
 

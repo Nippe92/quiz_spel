@@ -76,7 +76,11 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-
     </form>
+
+    <form action="{{ url_for('home') }}" method="get">
+        <button type="submit">Homepage</button>
+    </form>
+
 </body>
 </html>
