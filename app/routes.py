@@ -147,6 +147,7 @@ def highscore():
 
     user_id = session["user_id"]
 
+    #Joining in User database to be able to show username in highscores.
     top_scores = Score.query.join(User).order_by(Score.score.desc()).limit(15).all()
 
     user_score = Score.query.join(User).filter(User.id == user_id).order_by(Score.id.desc()).first()
